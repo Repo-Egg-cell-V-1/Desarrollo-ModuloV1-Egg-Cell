@@ -1,6 +1,5 @@
 package com.TheDevelopers._EggCell.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
