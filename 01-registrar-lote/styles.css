@@ -1,0 +1,30 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #fcf9f4;
+}
+
+/* Iconos de Material Symbols */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Estados del Toast */
+.toast-active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-hidden {
+    transform: translateY(100px);
+    opacity: 0;
+}
+
+/* Indicador del calendario */
+::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}

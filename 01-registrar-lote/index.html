@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Egg-Cell | Registrar Lote de Aves</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Configuración de Tailwind -->
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              background: "#fcf9f4",
+              "primary-container": "#0d2c4d",
+              "on-secondary-fixed": "#301400",
+              surface: "#fcf9f4",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#042100",
+              "on-primary-fixed-variant": "#2d486a",
+              "on-tertiary": "#ffffff",
+              "surface-tint": "#456084",
+              "inverse-on-surface": "#f3f0eb",
+              "surface-dim": "#dcdad5",
+              "surface-container-low": "#f6f3ee",
+              "tertiary-fixed-dim": "#9bd682",
+              "on-tertiary-fixed-variant": "#1d510d",
+              "on-primary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-highest": "#e5e2dd",
+              "secondary-fixed-dim": "#ffb781",
+              "primary-fixed": "#d3e3ff",
+              "tertiary-container": "#083300",
+              error: "#ba1a1a",
+              "on-primary-container": "#7a94bb",
+              "outline-variant": "#c4c6cf",
+              "secondary-container": "#fc943b",
+              "on-primary-fixed": "#001c39",
+              primary: "#001731",
+              "tertiary-fixed": "#b6f39c",
+              "on-surface": "#1c1c19",
+              "on-secondary-container": "#683300",
+              "secondary-fixed": "#ffdcc4",
+              "surface-variant": "#e5e2dd",
+              "surface-container": "#f0ede9",
+              "on-secondary": "#ffffff",
+              tertiary: "#031c00",
+              "primary-fixed-dim": "#adc8f1",
+              "on-secondary-fixed-variant": "#703800",
+              "inverse-primary": "#adc8f1",
+              "inverse-surface": "#31302d",
+              "on-tertiary-container": "#68a053",
+              "on-surface-variant": "#43474e",
+              "on-background": "#1c1c19",
+              "error-container": "#ffdad6",
+              outline: "#74777f",
+              "on-error": "#ffffff",
+              "surface-bright": "#fcf9f4",
+              secondary: "#934b00",
+              "surface-container-high": "#ebe8e3"
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px"
+            },
+            spacing: {
+              sm: "12px",
+              lg: "40px",
+              gutter: "24px",
+              xl: "64px",
+              md: "24px",
+              margin: "32px",
+              base: "8px",
+              xs: "4px",
+              "sidebar-width": "280px"
+            },
+            fontFamily: {
+              "label-md": ["Inter"],
+              "display-lg": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-lg": ["Inter"],
+              "label-sm": ["Inter"],
+              "body-md": ["Inter"],
+              "headline-md": ["Inter"]
+            },
+            fontSize: {
+              "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
+              "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+              "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "label-sm": ["12px", { lineHeight: "16px", fontWeight: "600" }],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }]
+            }
+          }
+        }
+      };
+    </script>
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="flex min-h-screen">
+    <!-- SideNavBar (Desktop Only) -->
+    <aside class="hidden md:flex flex-col fixed left-0 top-0 h-full w-sidebar-width bg-surface-container-low border-r border-outline-variant z-40 transition-transform duration-300" id="sidebar">
+        <div class="flex items-center gap-3 px-6 py-8">
+            <img alt="Egg-Cell Logo" class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLsYnHYdoEzsWy3MYAqK6bNT_SrjQdI7KRYj4jNoeU72Rs-_fE-WLjPex89bVHQcpTrd0BRqKQwLUgmqwGjSSwXDSDdU-dwysfE-3faYNwVLYxL2tWudepsDF6_zJfRCKdpq2-0B7K1rHnh1DOICmm7oQigCt_dvjeYxhXopsX0nGW--bzkEaECbutyZkUqeV3pO1F6xMOhx3rb6GTUNqencRY7XxgKitNdm1ExcKMvPkZs2RTR0-VjXV9jsnk4LGSMWiNf15Bb-">
+            <div>
+                <h2 class="font-headline-md text-headline-md font-bold text-primary">Egg-Cell</h2>
+                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Secure Admin</p>
+            </div>
+        </div>
+        <nav class="flex-1 px-3 space-y-1">
+            <a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 font-body-sm text-body-sm hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span>Dashboard</span>
+            </a>
+            <a class="flex items-center gap-4 bg-primary-container text-on-primary-container border-l-4 border-primary px-4 py-3 font-body-sm text-body-sm" href="#">
+                <span class="material-symbols-outlined">history_edu</span>
+                <span>Activity Logs</span>
+            </a>
+            <a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 font-body-sm text-body-sm hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">shield</span>
+                <span>Security Nodes</span>
+            </a>
+            <a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 font-body-sm text-body-sm hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">notifications_active</span>
+                <span>Real-time Alerts</span>
+            </a>
+            <a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 font-body-sm text-body-sm hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">query_stats</span>
+                <span>System Status</span>
+            </a>
+        </nav>
+        <div class="px-6 py-4">
+            <button class="w-full bg-secondary text-on-secondary py-3 rounded-lg font-label-md text-label-md font-bold hover:opacity-90 transition-all duration-200">
+                Upgrade Security
+            </button>
+        </div>
+        <div class="px-3 pb-6 space-y-1">
+            <a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 font-body-sm text-body-sm hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span>Settings</span>
+            </a>
+            <a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 font-body-sm text-body-sm hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">help</span>
+                <span>Help Center</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <div class="flex-1 flex flex-col md:ml-sidebar-width min-h-screen">
+        <!-- TopAppBar -->
+        <header class="flex justify-between items-center h-16 w-full px-lg sticky top-0 z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+            <div class="flex items-center gap-8">
+                <button class="md:hidden p-2 hover:bg-surface-container-high rounded-full">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <h1 class="font-headline-md text-headline-md font-extrabold text-primary hidden md:block">Egg-Cell</h1>
+                <nav class="hidden lg:flex items-center gap-6 font-label-bold text-label-bold">
+                    <a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Overview</a>
+                    <a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Deployments</a>
+                    <a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Analytics</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="hidden sm:flex items-center px-4 py-2 bg-error text-on-error rounded-lg font-label-md text-label-md transition-transform scale-95 hover:scale-100 duration-100 ease-in-out">
+                    Emergency Lockdown
+                </button>
+                <div class="flex items-center gap-2">
+                    <button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant cursor-pointer">
+                        <img class="w-full h-full object-cover" data-alt="A professional headshot of a mature female agricultural administrator in a modern office environment, wearing a clean navy blazer. The lighting is soft and natural, emphasizing a trustworthy and competent persona for a high-level system manager." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkPsyRyJEYOl5jRG6ugd77NtsU3JIgJOJ39SJCoHJAfXP3s462BWy1kOST0JWsNVZ5A1u5ajiTVgmiuSPTBJelBEYTTzROlK_qI3Eb3WxaZrlTWMZZF9FEYZTggtxvvlpXiAOHhNt84gySour3YcOE4jlBy_ka-TM6BhiOnQsGTW0vXM-t0iz_sdVoVzbzF-Jv5g6a3ccXENResM-rdWHLXiWeufiRTZmeKK9fX38G37pDNv1YlCY">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Body -->
+        <main class="flex-1 p-6 md:p-lg flex justify-center items-start animate-in fade-in duration-700">
+            <div class="max-w-3xl w-full">
+                <!-- Page Header with Back Button -->
+                <div class="mb-8 flex items-center gap-4">
+                    <button class="p-2 text-primary hover:bg-surface-container-high rounded-full transition-colors" onclick="window.history.back()">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'wght' 600;">arrow_back</span>
+                    </button>
+                    <div>
+                        <h2 class="font-headline-lg text-headline-lg text-primary-container">Registrar Lote de Aves</h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant mt-1">Ingrese la información técnica para el alta del nuevo lote en la granja</p>
+                    </div>
+                </div>
+
+                <!-- Main Form Card -->
+                <section class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container-highest p-8 md:p-10 transition-all hover:shadow-md">
+                    <form class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-gutter" id="loteForm">
+                        <!-- Código de Lote -->
+                        <div class="flex flex-col gap-2 col-span-1 md:col-span-2">
+                            <label class="font-label-md text-label-md text-on-surface" for="codigo">Código de Lote (*)</label>
+                            <input class="w-full border border-outline rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md placeholder:text-on-surface-variant/50 transition-all" id="codigo" name="codigo" placeholder="Ej. LOTE-2026-001" required type="text">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant italic">Identificador único asignado al galpón</span>
+                        </div>
+
+                        <!-- Cantidad de Aves -->
+                        <div class="flex flex-col gap-2">
+                            <label class="font-label-md text-label-md text-on-surface" for="cantidad">Cantidad de Aves (*)</label>
+                            <div class="relative">
+                                <input class="w-full border border-outline rounded-lg pl-4 pr-10 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md placeholder:text-on-surface-variant/50 transition-all" id="cantidad" name="cantidad" placeholder="Ej. 1500" required type="number">
+                                <span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant pointer-events-none">pets</span>
+                            </div>
+                        </div>
+
+                        <!-- Raza -->
+                        <div class="flex flex-col gap-2">
+                            <label class="font-label-md text-label-md text-on-surface" for="raza">Raza (*)</label>
+                            <select class="w-full border border-outline rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md bg-white transition-all appearance-none" id="raza" name="raza" required>
+                                <option disabled selected value="">Seleccione una raza</option>
+                                <option value="Hy-Line Brown">Hy-Line Brown</option>
+                                <option value="ISA Brown">ISA Brown</option>
+                                <option value="Lohmann Brown">Lohmann Brown</option>
+                                <option value="Cobb 500">Cobb 500</option>
+                                <option value="Otra">Otra</option>
+                            </select>
+                        </div>
+
+                        <!-- Fecha de Ingreso -->
+                        <div class="flex flex-col gap-2 col-span-1 md:col-span-2">
+                            <label class="font-label-md text-label-md text-on-surface" for="fecha">Fecha de Ingreso (*)</label>
+                            <div class="relative">
+                                <input class="w-full border border-outline rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md transition-all" id="fecha" name="fecha" required type="date">
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="flex flex-col sm:flex-row gap-4 pt-6 col-span-1 md:col-span-2 border-t border-surface-container-highest mt-4">
+                            <button class="flex-1 py-3 px-6 rounded-lg border-2 border-primary-container text-primary-container font-label-md text-label-md font-bold hover:bg-surface-container transition-colors duration-200" type="button">
+                                Cancelar
+                            </button>
+                            <button class="flex-1 py-3 px-6 rounded-lg bg-primary-container text-surface-container-low font-label-md text-label-md font-bold hover:bg-primary-container/90 transition-all transform active:scale-95 shadow-sm" type="submit">
+                                Registrar Lote
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer Background Ornament -->
+        <div class="fixed bottom-0 right-0 w-64 h-64 opacity-5 pointer-events-none select-none overflow-hidden">
+            <img alt="" class="w-full h-full scale-150 rotate-12 filter grayscale" src="https://lh3.googleusercontent.com/aida/AP1WRLsYnHYdoEzsWy3MYAqK6bNT_SrjQdI7KRYj4jNoeU72Rs-_fE-WLjPex89bVHQcpTrd0BRqKQwLUgmqwGjSSwXDSDdU-dwysfE-3faYNwVLYxL2tWudepsDF6_zJfRCKdpq2-0B7K1rHnh1DOICmm7oQigCt_dvjeYxhXopsX0nGW--bzkEaECbutyZkUqeV3pO1F6xMOhx3rb6GTUNqencRY7XxgKitNdm1ExcKMvPkZs2RTR0-VjXV9jsnk4LGSMWiNf15Bb-">
+        </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] toast-hidden transition-all duration-500 ease-out" id="successToast">
+        <div class="bg-[#5A9146] text-white px-6 py-4 rounded-xl shadow-xl flex items-center gap-4 min-w-[320px]">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span class="font-label-md text-label-md font-medium tracking-wide">¡Lote registrado correctamente!</span>
+            <button class="ml-auto hover:bg-white/20 rounded-full p-1 transition-colors" onclick="closeToast()">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>

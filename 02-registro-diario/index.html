@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>HU-1: Registro Diario de Producción e Insumos - Egg-Cell</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e5e2dd",
+                        "surface-tint": "#456084",
+                        "on-primary-fixed-variant": "#2d486a",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fcf9f4",
+                        "secondary-fixed": "#ffdcc4",
+                        "on-secondary-fixed": "#301400",
+                        error: "#ba1a1a",
+                        "on-secondary-container": "#683300",
+                        "inverse-surface": "#31302d",
+                        "secondary-fixed-dim": "#ffb781",
+                        "on-surface": "#1c1c19",
+                        "primary-fixed-dim": "#adc8f1",
+                        "primary-container": "#0d2c4d",
+                        outline: "#74777f",
+                        "on-tertiary-fixed-variant": "#1d510d",
+                        "inverse-on-surface": "#f3f0eb",
+                        "on-secondary-fixed-variant": "#703800",
+                        "inverse-primary": "#adc8f1",
+                        "primary-fixed": "#d3e3ff",
+                        "tertiary-fixed-dim": "#9bd682",
+                        "on-primary-fixed": "#001c39",
+                        "on-tertiary-container": "#68a053",
+                        "on-primary-container": "#7a94bb",
+                        "surface-dim": "#dcdad5",
+                        "tertiary-container": "#083300",
+                        "surface-container": "#f0ede9",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-low": "#f6f3ee",
+                        "secondary-container": "#fc943b",
+                        primary: "#001731",
+                        "tertiary-fixed": "#b6f39c",
+                        tertiary: "#031c00",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#43474e",
+                        surface: "#fcf9f4",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e5e2dd",
+                        "on-secondary": "#ffffff",
+                        secondary: "#934b00",
+                        "on-tertiary-fixed": "#042100",
+                        "on-background": "#1c1c19",
+                        "surface-container-high": "#ebe8e3",
+                        background: "#fcf9f4"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        xl: "64px",
+                        md: "24px",
+                        lg: "40px",
+                        margin: "32px",
+                        xs: "4px",
+                        sm: "12px",
+                        gutter: "24px",
+                        base: "8px"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-surface text-on-surface font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+    <!-- Sidebar Wrapper -->
+    <aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant dark:border-outline flex flex-col z-50 transition-all duration-300 md:translate-x-0 -translate-x-full" id="sidebar">
+        <div class="px-6 py-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary font-bold">EC</div>
+                <div>
+                    <h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary leading-tight">Egg-Cell</h1>
+                    <p class="text-xs text-on-surface-variant opacity-70">Secure Admin</p>
+                </div>
+            </div>
+        </div>
+        <nav class="flex-1 px-2 space-y-1 overflow-y-auto custom-scrollbar">
+            <a class="flex items-center gap-4 text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-label-md text-label-md">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-4 bg-primary-container text-on-primary-container dark:bg-primary-fixed-dim dark:text-on-primary-fixed border-l-4 border-primary px-4 py-3" href="#">
+                <span class="material-symbols-outlined">history_edu</span>
+                <span class="font-label-md text-label-md">Activity Logs</span>
+            </a>
+            <a class="flex items-center gap-4 text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">shield</span>
+                <span class="font-label-md text-label-md">Security Nodes</span>
+            </a>
+            <a class="flex items-center gap-4 text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">notifications_active</span>
+                <span class="font-label-md text-label-md">Real-time Alerts</span>
+            </a>
+            <a class="flex items-center gap-4 text-on-surface-variant dark:text-surface-variant px-4 py-3 hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">query_stats</span>
+                <span class="font-label-md text-label-md">System Status</span>
+            </a>
+        </nav>
+        <div class="p-4 bg-primary-container/10 mx-4 mb-6 rounded-xl border border-primary/20">
+            <p class="text-xs font-semibold text-primary mb-2">Security Level: High</p>
+            <button class="w-full bg-secondary-container text-on-secondary-container py-2 rounded-lg text-sm font-bold hover:scale-[0.98] transition-transform">
+                Upgrade Security
+            </button>
+        </div>
+        <div class="px-2 py-4 border-t border-outline-variant">
+            <a class="flex items-center gap-4 text-on-surface-variant dark:text-surface-variant px-4 py-2 hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-label-md text-label-md">Settings</span>
+            </a>
+            <a class="flex items-center gap-4 text-on-surface-variant dark:text-surface-variant px-4 py-2 hover:bg-surface-container-high transition-colors duration-200" href="#">
+                <span class="material-symbols-outlined">help</span>
+                <span class="font-label-md text-label-md">Help Center</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Content Area -->
+    <main class="md:ml-64 min-h-screen bg-[#FAF7F2] flex flex-col">
+        <!-- TopAppBar -->
+        <header class="flex justify-between items-center h-16 w-full px-lg sticky top-0 z-40 bg-surface/80 backdrop-blur-md shadow-sm">
+            <div class="flex items-center gap-4">
+                <button class="md:hidden p-2 text-on-surface-variant" id="mobile-menu-toggle">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <div class="hidden md:flex items-center gap-6">
+                    <a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold text-label-bold" href="#">Overview</a>
+                    <a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold text-label-bold" href="#">Deployments</a>
+                    <a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold text-label-bold" href="#">Analytics</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="hidden lg:flex items-center gap-2 bg-error text-on-error px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all active:scale-95">
+                    <span class="material-symbols-outlined text-sm">lock</span>
+                    Emergency Lockdown
+                </button>
+                <div class="flex items-center gap-2">
+                    <button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant shadow-sm">
+                        <img class="w-full h-full object-cover" data-alt="Close up professional portrait of a senior agricultural operations manager wearing a smart navy blue tactical shirt, looking confident and focused in a modern control room environment with warm, subtle lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaOF0SFKhaOsa1eSaUKYMr1v0DGk9xwrvVIrTIxwxEsUpChWO_byznvxi-Gk4fAuIQ6_TaSCKKcvVfZLmSHFmm1SkhCSawx1VEkMNI-lV0sB63_OlvL2R1BPSDWE8Ln7Q227ZrOODXaAwLsdwATHOXMJNQWiQW5j_wAWkfF759-l44e67UNsuhf1FsF8X9orklNny7Cv8scBcQ0D3z89dpL2vFeKshCTaisUG-yJDcS2NMh5g2JcM">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Form Container -->
+        <div class="flex-1 p-6 md:p-10 max-w-5xl mx-auto w-full">
+            <div class="mb-8">
+                <h2 class="font-headline-lg text-headline-lg text-primary mb-2">Registro Diario de Producción e Insumos</h2>
+                <p class="text-on-surface-variant">Monitoreo de trazabilidad diaria: producción de huevos y consumo de recursos por lote.</p>
+            </div>
+
+            <form class="space-y-8" id="productionForm">
+                <!-- Section 1: Datos del Lote -->
+                <div class="bg-surface-container-lowest p-6 rounded-xl border border-[#E8E4DE] shadow-sm">
+                    <div class="flex items-center gap-2 mb-6 border-b border-surface-variant pb-4">
+                        <span class="material-symbols-outlined text-primary">analytics</span>
+                        <h3 class="font-headline-md text-headline-md text-on-surface">Datos del Lote y Fecha</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="block text-label-md font-label-md text-on-surface-variant">Lote/Galpón</label>
+                            <select class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 bg-surface-container-low py-3 px-4" name="lote_id">
+                                <option value="galpon_a">Galpón A - Lote #1</option>
+                                <option value="galpon_b">Galpón B - Lote #2</option>
+                                <option value="galpon_c">Galpón C - Lote #3</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-label-md font-label-md text-on-surface-variant">Fecha del Registro</label>
+                            <input class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 bg-surface-container-low py-3 px-4" id="registroFecha" name="fecha_registro" type="date">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Conteo de Producción -->
+                <div class="bg-surface-container-lowest p-6 rounded-xl border border-[#E8E4DE] shadow-sm">
+                    <div class="flex items-center justify-between mb-6 border-b border-surface-variant pb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">egg</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Conteo de Producción (Huevos)</h3>
+                        </div>
+                        <div class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-full font-bold flex flex-col items-center shadow-md animate-pulse-slow" id="totalBadge">
+                            <span class="text-[10px] uppercase tracking-tighter opacity-80">Total Recolectado</span>
+                            <span class="text-xl leading-none" id="totalValue">4</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="relative">
+                            <label class="block text-label-md font-label-md text-on-surface-variant mb-2">Huevos Comercializables</label>
+                            <div class="flex items-center bg-surface-container-low rounded-lg p-1 border border-outline-variant focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+                                <span class="material-symbols-outlined px-3 text-on-surface-variant">check_circle</span>
+                                <input class="flex-1 bg-transparent border-none focus:ring-0 py-3 text-lg font-semibold" id="huevosComercializables" min="0" name="huevos_comercializables" oninput="calculateTotal()" placeholder="4" type="number">
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <label class="block text-label-md font-label-md text-on-surface-variant mb-2">Huevos Rotos / Descarte</label>
+                            <div class="flex items-center bg-surface-container-low rounded-lg p-1 border border-outline-variant focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+                                <span class="material-symbols-outlined px-3 text-error">heart_broken</span>
+                                <input class="flex-1 bg-transparent border-none focus:ring-0 py-3 text-lg font-semibold" id="huevosRotos" min="0" name="huevos_descarte" oninput="calculateTotal()" placeholder="3" type="number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Consumo de Insumos -->
+                <div class="bg-surface-container-lowest p-6 rounded-xl border border-[#E8E4DE] shadow-sm">
+                    <div class="flex items-center justify-between mb-6 border-b border-surface-variant pb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">inventory_2</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Consumo de Insumos</h3>
+                        </div>
+                        <button class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-bold hover:shadow-lg transition-all active:scale-95" onclick="addInsumoRow()" type="button">
+                            <span class="material-symbols-outlined text-sm">add</span>
+                            Agregar Insumo
+                        </button>
+                    </div>
+                    <div class="space-y-4" id="insumosContainer">
+                        <!-- Dynamic Rows will be injected here -->
+
+                        <div class="insumo-row grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-surface-container rounded-lg border border-transparent hover:border-outline-variant transition-colors group relative" style="opacity: 1; transform: translateY(0px); transition: 0.3s ease-out;">
+                            <div class="md:col-span-4">
+                                <label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-1">Tipo de Insumo</label>
+                                <select class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-0 bg-surface py-2 px-3 text-sm" name="insumos[][tipo]">
+                                    <option value="alimento">Alimento</option>
+                                    <option value="suplemento">Suplemento</option>
+                                    <option value="vacuna">Vacuna</option>
+                                    <option value="agua">Agua</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-4">
+                                <label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-1">Cantidad Consumida</label>
+                                <input class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-0 bg-surface py-2 px-3 text-sm font-semibold" name="insumos[][cantidad]" placeholder="0.00" step="0.01" type="number">
+                            </div>
+                            <div class="md:col-span-3">
+                                <label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-1">Unidad</label>
+                                <select class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-0 bg-surface py-2 px-3 text-sm" name="insumos[][unidad]">
+                                    <option value="kg">kg</option>
+                                    <option value="bultos">Bultos</option>
+                                    <option value="l">L (Litros)</option>
+                                    <option value="g">g (Gramos)</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-1 flex items-end justify-center pb-1">
+                                <button class="p-2 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-full transition-all group-hover:opacity-100 opacity-60" onclick="removeInsumoRow(this)" type="button">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="insumo-row grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-surface-container rounded-lg border border-transparent hover:border-outline-variant transition-colors group relative" style="opacity: 1; transform: translateY(0px); transition: 0.3s ease-out;">
+                            <div class="md:col-span-4">
+                                <label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-1">Tipo de Insumo</label>
+                                <select class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-0 bg-surface py-2 px-3 text-sm" name="insumos[][tipo]">
+                                    <option value="alimento">Alimento</option>
+                                    <option value="suplemento">Suplemento</option>
+                                    <option value="vacuna">Vacuna</option>
+                                    <option value="agua">Agua</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-4">
+                                <label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-1">Cantidad Consumida</label>
+                                <input class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-0 bg-surface py-2 px-3 text-sm font-semibold" name="insumos[][cantidad]" placeholder="0.00" step="0.01" type="number">
+                            </div>
+                            <div class="md:col-span-3">
+                                <label class="block text-[10px] uppercase font-bold text-on-surface-variant mb-1">Unidad</label>
+                                <select class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-0 bg-surface py-2 px-3 text-sm" name="insumos[][unidad]">
+                                    <option value="kg">kg</option>
+                                    <option value="bultos">Bultos</option>
+                                    <option value="l">L (Litros)</option>
+                                    <option value="g">g (Gramos)</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-1 flex items-end justify-center pb-1">
+                                <button class="p-2 text-on-surface-variant hover:text-error hover:bg-error/10 rounded-full transition-all group-hover:opacity-100 opacity-60" onclick="removeInsumoRow(this)" type="button">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center py-12 border-2 border-dashed border-outline-variant rounded-xl text-on-surface-variant bg-surface/30 hidden" id="emptyInsumos">
+                        <span class="material-symbols-outlined text-4xl mb-2 opacity-30">playlist_add</span>
+                        <p class="text-sm">No se han registrado consumos. Haga clic en 'Agregar Insumo' para iniciar.</p>
+                    </div>
+                </div>
+
+                <!-- Footer Buttons -->
+                <div class="flex flex-col sm:flex-row justify-end items-center gap-4 pt-6 pb-12">
+                    <button class="w-full sm:w-auto px-10 py-3 border border-primary text-primary rounded-lg font-bold hover:bg-primary/5 transition-colors" type="button">
+                        Cancelar
+                    </button>
+                    <button class="w-full sm:w-auto px-10 py-3 bg-primary text-on-primary rounded-lg font-bold shadow-lg shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0 transition-all" type="submit">
+                        Guardar Registro de Producción
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer / Technical Info -->
+        <footer class="mt-auto py-6 px-10 border-t border-outline-variant bg-surface-container-low text-[11px] text-on-surface-variant flex justify-between items-center">
+            <div>
+                <span class="font-bold">ID Transacción:</span>
+                <span class="font-mono">TXN-992-B82-EGG</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span
